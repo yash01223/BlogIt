@@ -8,7 +8,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.List;
+
 
 @Data
 @AllArgsConstructor
@@ -35,4 +36,7 @@ public class UserDTO {
 
     // // Number of posts for this user (to avoid loading full post list)
     private Integer postCount;
+    
+    private List<String> roles;
+    private Boolean enabled;
 }

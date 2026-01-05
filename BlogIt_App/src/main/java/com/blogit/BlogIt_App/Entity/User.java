@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -30,10 +29,20 @@ public class User {
     private String username;
     private String email;
     private String password;
+    private boolean enabled = true;
 
 
     private LocalDate createdAt;
     private LocalDate updatedAt;
+
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private List<Role> roles = new ArrayList<>();
 
 
     @OneToMany(mappedBy = "user",
